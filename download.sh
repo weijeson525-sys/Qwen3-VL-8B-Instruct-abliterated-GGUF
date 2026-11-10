@@ -4,6 +4,12 @@
 # weights are NOT included (GitHub single-file limit is 100 MB).
 # No token, no credentials: the HF repo is public (gated=false).
 set -euo pipefail
+# Reject unexpected extra arguments: a stray extra arg must never start a download.
+if [ "$#" -gt 1 ]; then
+  echo "ERROR: too many arguments (expected at most 1). Usage: ./download.sh [QUANT|--list|--mmproj|--help]" >&2
+  exit 1
+fi
+
 HF_REPO="mradermacher/Qwen3-VL-8B-Instruct-abliterated-GGUF"
 BASE="https://huggingface.co/$HF_REPO/resolve/main"
 
